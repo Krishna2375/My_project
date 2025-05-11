@@ -7,8 +7,13 @@ import small_function as SM
 order_detail_list=[]
 order_count=0
 
+order_detail_earnings=[]
+order_earnings=0
+
 def order_detail():
     global order_detail_list
+    global order_earnings
+    global earning_calculator
 
     customer_details={
         1:"K. RAJARAMAN, Flat No. 5, Victoria Garden, 106, J.N. Salai,Koyambedu, Chennai - 600107",
@@ -18,7 +23,7 @@ def order_detail():
         } 
     
     restaurants_details={
-        1:"R&G - GreenPark Chennai, 183 N.S.K. Salai, Arcot Rd, Vadapalani Hotel Green Park, Chennai (Madras) 600026 In",
+        1:"R&G - GreenPark Chennai, 183 N.S.K. Salai, Arcot Rd, Vadapalani Hotel Green Park, Chennai (Madras) 600026 India",
         2:"Southern Spice, Mahatma Gandhi Road Lobby Level, Taj Coromandel, Chennai, Chennai (Madras) 600034 India",
         3:"Waterside, 4/129, Mount Poonamallee Road Feathers Hotel, Manappakkam, Chennai (Madras) 600089 India",
         4:"The Reef, 280 ECR, Vadanamelli Sheraton Grand Chennai Resort & Spa, Chennai (Madras) 603104 India"
@@ -28,22 +33,37 @@ def order_detail():
     res_detail=random.choice(list(restaurants_details.values()))
     order_detail_list.append({cus_detail:res_detail})
 
+    print("\n")
+    print("Restaurant Details : ".center(68))
     print(res_detail)
     SM.sleep(1.5)
+
     try:
         restaurants_confirmation=int(input("After You Pick Food From Restaurant Enter 1 : "))
         if restaurants_confirmation==1:
             print("Food Pickup Confirmation Is Accpeted.")
             pickup_confirmation=1
+
             if pickup_confirmation==1:
+                print("\n")
+                print("Customer Details : ".center(68))
                 print(cus_detail)
                 SM.sleep(1.2)
-                delivery_comfrimation_input=int(input("If Food Delivey Completed Enter 1 : "))
+
+                delivery_comfrimation_input=int(input("If Food Delivery Completed Enter 1 : "))
+
                 if delivery_comfrimation_input==1:
                     for i in range (0, 6):
                         print(f"Please Wait We Checking. {i+1}",end="\r")
                         time.sleep(1)
                     print("Thank You, Your order Marked as Completed.")
+
+                    earning_calculator=random.randint(35,80)
+                    order_detail_earnings.append(earning_calculator)
+                    order_earnings+=earning_calculator
+
+                    print(f"\nYour Total Earnings In This Order ₹{earning_calculator}")
+
                     return True
         
         elif restaurants_confirmation!=1:
@@ -52,14 +72,14 @@ def order_detail():
             return restaurants_confirmation
         
         else:
-            print("Somthing Went Wrong Please Try Again. ")
+            print("Something Went Wrong Please Try Again. ")
             SM.sleep(1)
             return restaurants_confirmation
 
     except ValueError:
         print ("You Given Wrong Input, only Numbers can be enter .")
         SM.sleep(1)
-        return restaurants_confirmation
+        return 
 
 
 def order():

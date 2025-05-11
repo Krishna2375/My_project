@@ -77,7 +77,7 @@ Enter Here : """))
                                     print ("You Given Wrong Format Input, Please Try Again.")
                              
             else:
-                print("\nyour Already In Online, Please Wait Get Order.\n")
+                print("\nyour Already In Online, Please Wait To Get Order.\n")
                 print("We Redirect You Get Order.\n")
                 SM.loading(7)
                 order_page.order() #last ahh Ethula vitan 
@@ -94,7 +94,43 @@ Enter Here : """))
     
 
 def earnings():
-    pass
+    print(f"\nYour Total Earning Today : {order_page.order_earnings}")
+    try:
+        earnings_input=int(input("""1.For Get Total Order Detail
+2.For Get Total Order Earnings 
+\nEnter The Number Here : """))
+        if earnings_input==1:
+            print(f"\nYour total Order Count : {order_page.order_count} \nYour total Order Detail : \n")
+            count_increase=0
+            for i in range (len(order_page.order_detail_list)):
+                print (order_page.order_detail_list[count_increase])
+                count_increase+=1
+                print("\n")
+            SM.loading(5)
+            main()
+
+        elif earnings_input==2:
+            earnings_increase=0
+            for j in range (order_page.order_count):
+                print(order_page.order_detail_earnings[earnings_increase])
+                earnings_increase+=1
+            print("\nYour Total Earnings =",sum(order_page.order_detail_earnings))
+            SM.loading(5)
+            main()
+        
+        elif earnings_input>2:
+            print("You Entered Incorrect Input. Please Try Again.")
+            SM.loading(3)
+            main()
+
+        else:
+            print("You Entered Incorrect Input. Please Try Again.")
+            SM.loading(3)
+            main()
+
+    except ValueError:
+        print ("You Entered Invalid Input variable. Please Try Again.")
+        
 
 def help():
     pass
@@ -126,6 +162,7 @@ Enter the Number (1-4) : """))
             help()
 
         elif main_input==5:
+            print("Thank You For Using")
             pass
         else:
             print ("Soming Thing Went Wrong Please Try Again.")
