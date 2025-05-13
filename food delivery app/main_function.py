@@ -111,7 +111,7 @@ def earnings():
 
         elif earnings_input==2:
             earnings_increase=0
-            for j in range (order_page.order_count):
+            for j in range (order_page.order_earnings):
                 print(order_page.order_detail_earnings[earnings_increase])
                 earnings_increase+=1
             print("\nYour Total Earnings =",sum(order_page.order_detail_earnings))
@@ -133,7 +133,40 @@ def earnings():
         
 
 def help():
-    pass
+    print ("You are now in help page : ".center(68))
+    try:
+        help_input=int(input("""1.Contact administrator
+2.View booked shift
+3.Total order count and order earning
+
+Enter the number here : """))
+        if help_input==1:
+            print("\nEmail ID : krishnakumar23070@gmail.com \nlinkedin : https://www.linkedin.com/in/krishnakumar-s-551b24322/ \n\nIf any help need please contact. ")
+            SM.sleep(1.5)
+            return main()
+        elif help_input==2:
+            if shift_value:
+                print(f"Your booked shift number : {shift_value}")
+                SM.sleep(1.5)
+                return main()
+            else:
+                print("Your not booked any shift, book shift to get online. ")
+                SM.sleep(1.5)
+                return shift_booking()
+        elif help_input ==3:
+            print(f"\nYour total order count : {order_page.order_count} \nYour total order earnings : {order_page.order_earnings}")
+            SM.sleep(1.5)
+            return main()
+        else:
+            print("Something went worrng please try again. ")
+            SM.sleep(1.5)
+            print("\n")
+            return help()
+    except ValueError:
+        print ("You given invalid input, Please try again.")
+        SM.sleep(1.5)
+        print("\n")
+        return help()
 
 def main():
     try :
@@ -164,6 +197,7 @@ Enter the Number (1-4) : """))
         elif main_input==5:
             print("Thank You For Using")
             pass
+            
         else:
             print ("Soming Thing Went Wrong Please Try Again.")
             SM.sleep(1)
